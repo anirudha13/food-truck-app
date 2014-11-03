@@ -1,0 +1,27 @@
+{
+  "name": "food-truck-app",
+  "version": "0.1.0",
+  "homepage": "https://github.com/anirudha13/food-truck-app",
+  "authors": [
+    "anirudha13 <anirudha_81@yahoo.com>"
+  ],
+  "description": "Application that maps SF Food Trucks onto a map using the freely available data provided by SF.",
+  "main": "src/main/resources/assets/index.html",
+  "keywords": [
+    "none"
+  ],
+  "license": "Apache",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/main/resources/assets",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.0",
+    "jquery": "~2.1.1"
+  }
+}
