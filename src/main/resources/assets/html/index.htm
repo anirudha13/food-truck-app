@@ -17,6 +17,13 @@
 
     <!-- Custom styles for this template -->
     <link href="css/foodtruckmap.css" rel="stylesheet">
+
+    <script src="jquery/dist/jquery.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.js"></script>
+    <script src="angularjs/angular.js"></script>
+    <script src="ngmap/build/scripts/ng-map.js"></script>
+    <script src="js/foodtruckmap.js" type="text/javascript" charset="utf-8"></script>
+
 </head>
 
 <body>
@@ -44,14 +51,11 @@
 
 </div>
 
-<div class="container">
+<div class="container" data-ng-app="foodTruckApp">
     <map />
 </div>
 
 <!-- ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="jquery/dist/jquery.js"></script>
-<script src="bootstrap/dist/js/bootstrap.js"></script>
-<script src="js/foodtruckmap.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

@@ -1,3 +1,6 @@
+
+var myApp = angular.module('foodTruckApp', ['ngMap']);
+
 $(document).ready(function() {
     console.log("Document is Ready now let's make a call out to Food Truck API.");
     fetchFoodTruckData();
