@@ -1,0 +1,23 @@
+# use the simple server factory if you only want to run on a single port
+server:
+  type: simple
+  applicationContextPath: /foodtruckmapper
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 8080
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.example.app' to DEBUG.
+    my.anirudha.foodtruckmap: DEBUG
+
+  appenders:
+    - type: console

@@ -1,4 +1,4 @@
-package my.anirudha.foodtruck;
+package my.anirudha.foodtruckmap;
 
 import io.dropwizard.Configuration;
 
