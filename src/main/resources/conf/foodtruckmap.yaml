@@ -1,7 +1,10 @@
+
+serviceURI: "http://data.sfgov.org/resource/rqzj-sfat.json"
+
 # use the simple server factory if you only want to run on a single port
 server:
   type: simple
-  applicationContextPath: /foodtruckmapper
+  applicationContextPath: /foodtruckmap
   adminContextPath: /admin
   connector:
     type: http
@@ -21,3 +24,8 @@ logging:
 
   appenders:
     - type: console
+
+
+httpClient:
+  timeout: 6000ms
+  connectionTimeout: 6000ms

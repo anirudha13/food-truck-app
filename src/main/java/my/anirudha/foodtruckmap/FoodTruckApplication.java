@@ -7,6 +7,7 @@ import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.client.HttpClientBuilder;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import my.anirudha.foodtruckmap.core.FoodTruckService;
 import my.anirudha.foodtruckmap.health.FoodTruckHealthCheck;
 import my.anirudha.foodtruckmap.resources.FoodTruckResource;
 
@@ -18,7 +19,7 @@ public class FoodTruckApplication extends Application<FoodTruckConfiguration> {
 
     @Override
     public String getName() {
-        return "foodtruckmapper";
+        return "foodtruckmap";
     }
 
     @Override
@@ -28,7 +29,6 @@ public class FoodTruckApplication extends Application<FoodTruckConfiguration> {
         bootstrap.addBundle(new AssetsBundle("/assets/css", "/css", null, "css"));
         bootstrap.addBundle(new AssetsBundle("/assets/bootstrap", "/bootstrap", null, "bootstrap"));
         bootstrap.addBundle(new AssetsBundle("/assets/jquery", "/jquery", null, "jquery"));
-        bootstrap.addBundle(new AssetsBundle("/assets/icons", "/icons", null, "icons"));
         bootstrap.addBundle(new AssetsBundle("/assets/marker", "/marker", null, "marker"));
         bootstrap.addBundle(new AssetsBundle("/assets/angularjs", "/angularjs", null, "angularjs"));
         bootstrap.addBundle(new AssetsBundle("/assets/ngmap", "/ngmap", null, "ngmap"));
@@ -36,12 +36,15 @@ public class FoodTruckApplication extends Application<FoodTruckConfiguration> {
 
     @Override
     public void run(final FoodTruckConfiguration configuration,
-                    final Environment environment) {
-        final HttpClient httpClient = new HttpClientBuilder(environment).build(getName() + "client");
-        final FoodTruckHealthCheck foodTruckHealthCheck = new FoodTruckHealthCheck();
-        final FoodTruckResource foodTruckResource = new FoodTruckResource(httpClient);
-
+                    final Environment environment) throws Exception {
+        final HttpClient httpClient = new HttpClientBuilder(environment).using(configuration.getHttpClientConfiguration()).build(getName() + "client");
+        final FoodTruckHealthCheck foodTruckHealthCheck = new FoodTruckHealthCheck(httpClient, configuration.getServiceURI());
         environment.healthChecks().register("foodTruckHealthCheck", foodTruckHealthCheck);
+
+        final FoodTruckService foodTruckService = new FoodTruckService(httpClient);
+        foodTruckService.init();
+
+        final FoodTruckResource foodTruckResource = new FoodTruckResource(foodTruckService);
         environment.jersey().register(foodTruckResource);
     }
 

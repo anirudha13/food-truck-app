@@ -15,21 +15,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * Created with IntelliJ IDEA.
- * User: anirudha
- * Date: 04/11/14
- * Time: 11:28 AM
+ * A service class that provides the simple interface between the resource and the External Data
+ * Service that we call for the food truck data.
  *
  * @author anirudha
  */
-public class FoodTruckService {
+public class FoodTruckRemoteClient {
 
-    private static final Logger logger = LoggerFactory.getLogger(FoodTruckService.class);
+    private static final Logger logger = LoggerFactory.getLogger(FoodTruckRemoteClient.class);
     private static final String  API_URL = "http://data.sfgov.org/resource/rqzj-sfat.json";
 
     private final HttpClient httpClient;
 
-    public FoodTruckService(HttpClient httpClient) {
+    public FoodTruckRemoteClient(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 

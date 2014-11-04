@@ -3,7 +3,7 @@
  * User: anirudha
  */
 
-var LOCATE_TRUCKS_ENDPOINT = "/foodtruckmapper/locatetrucks";
+var LOCATE_TRUCKS_ENDPOINT = "/foodtruckmap/trucks/all";
 
 var foodTruckApp = angular.module('foodTruckApp', ['ngMap']);
 
@@ -26,4 +26,5 @@ foodTruckApp.controller('FoodTruckMapController', ['$scope', '$http', function($
             console.log("Data :: " + data);
             // create the error label on top of the page with the error message
         });
+
 }]);

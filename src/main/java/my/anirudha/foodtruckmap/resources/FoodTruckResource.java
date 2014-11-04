@@ -1,59 +1,48 @@
 package my.anirudha.foodtruckmap.resources;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.Collection;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.codahale.metrics.annotation.Timed;
-import com.google.common.base.Optional;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import my.anirudha.foodtruckmap.api.FoodTruck;
+import my.anirudha.foodtruckmap.core.FoodTruckService;
 
 /**
  * A simple resource that calls out to the Web API for fetching Food Truck data.
  *
  * @author anirudha
  */
-@Path("/locatetrucks")
+@Path("/trucks")
 @Produces(MediaType.APPLICATION_JSON)
 public class FoodTruckResource {
 
     private static final Logger logger = LoggerFactory.getLogger(FoodTruckResource.class);
-    public static final String API_ENDPOINT = "http://data.sfgov.org/resource/rqzj-sfat.json";
 
-    private final HttpClient httpClient;
+    private final FoodTruckService foodTruckService;
 
-    public FoodTruckResource(HttpClient httpClient) {
-        this.httpClient = httpClient;
+    public FoodTruckResource(FoodTruckService foodTruckService) {
+        this.foodTruckService = foodTruckService;
     }
 
     @GET
+    @Path("/all")
     @Timed
-    public String locateFoodTrucks(@QueryParam("location") Optional<String> locationPos) {
-        logger.debug("Got request for fetching food trucks for SF {} ... ", locationPos);
+    public String allTrucks() throws IOException {
+        logger.debug("Fetching ALL food trucks in SF.");
+        Collection<FoodTruck> allFoodTrucks = foodTruckService.fetchAll();
+        ObjectMapper objectMapper = new ObjectMapper();
         StringWriter stringWriter = new StringWriter();
-        HttpGet httpGet = new HttpGet(API_ENDPOINT);
-        try {
-            HttpResponse httpResponse = httpClient.execute(httpGet);
-            InputStream inputStream = httpResponse.getEntity().getContent();
-            IOUtils.copy(inputStream, stringWriter);
-            logger.debug("Got Status Code for Response {}", httpResponse.getStatusLine());
-            logger.debug("Got Response from URL {}", httpResponse);
-            //logger.debug("Got response string, {}", stringWriter.toString());
-        } catch (IOException e) {
-            logger.error("Exception while making API call.", e);
-        }
+        objectMapper.writeValue(stringWriter, allFoodTrucks);
         return stringWriter.toString();
     }
 }
