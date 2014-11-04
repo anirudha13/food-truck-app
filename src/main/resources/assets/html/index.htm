@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="icons/favicon.ico">
+    <link rel="icon" href="marker/favicon.ico">
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6TkJuM2JTg-Xo3OEsTEfZunJUFlgH65k"></script>
 
@@ -64,15 +64,15 @@
         <div id="filterContainer" class="col-md-3">
             <p>This is the Column for the filtering of the Map Markers</p>
             <p>This is the Column for the filtering of the Map Markers</p>
-            <p>This is the Column for the filtering of the Map Markers</p>
-            <p>This is the Column for the filtering of the Map Markers</p>
-            <p>This is the Column for the filtering of the Map Markers</p>
-            <p>This is the Column for the filtering of the Map Markers</p>
-            <p>This is the Column for the filtering of the Map Markers</p>
         </div>
 
         <div id="mapContainer" class="col-md-9">
-            <map id="mapElem"/>
+            <map id="mapElem" center="[37.7577,-122.4376]" zoom="12">
+                <marker ng-repeat="truck in trucks"
+                        position="{{truck.latitude}}, {{truck.longitude}}"
+                        title={{truck.applicant}}
+                        icon="marker/truck.png"></marker>
+            </map>
         </div>
     </div>
 </div>

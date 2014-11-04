@@ -29,6 +29,7 @@ public class FoodTruckApplication extends Application<FoodTruckConfiguration> {
         bootstrap.addBundle(new AssetsBundle("/assets/bootstrap", "/bootstrap", null, "bootstrap"));
         bootstrap.addBundle(new AssetsBundle("/assets/jquery", "/jquery", null, "jquery"));
         bootstrap.addBundle(new AssetsBundle("/assets/icons", "/icons", null, "icons"));
+        bootstrap.addBundle(new AssetsBundle("/assets/marker", "/marker", null, "marker"));
         bootstrap.addBundle(new AssetsBundle("/assets/angularjs", "/angularjs", null, "angularjs"));
         bootstrap.addBundle(new AssetsBundle("/assets/ngmap", "/ngmap", null, "ngmap"));
     }

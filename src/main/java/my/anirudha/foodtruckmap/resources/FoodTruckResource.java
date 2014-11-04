@@ -42,18 +42,18 @@ public class FoodTruckResource {
     @Timed
     public String locateFoodTrucks(@QueryParam("location") Optional<String> locationPos) {
         logger.debug("Got request for fetching food trucks for SF {} ... ", locationPos);
+        StringWriter stringWriter = new StringWriter();
         HttpGet httpGet = new HttpGet(API_ENDPOINT);
         try {
             HttpResponse httpResponse = httpClient.execute(httpGet);
             InputStream inputStream = httpResponse.getEntity().getContent();
-            StringWriter stringWriter = new StringWriter();
             IOUtils.copy(inputStream, stringWriter);
             logger.debug("Got Status Code for Response {}", httpResponse.getStatusLine());
             logger.debug("Got Response from URL {}", httpResponse);
-            logger.debug("Got response string, {}", stringWriter.toString());
+            //logger.debug("Got response string, {}", stringWriter.toString());
         } catch (IOException e) {
             logger.error("Exception while making API call.", e);
         }
-        return "";
+        return stringWriter.toString();
     }
 }
