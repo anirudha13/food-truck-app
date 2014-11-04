@@ -1,10 +1,7 @@
 
-var myApp = angular.module('foodTruckApp', ['ngMap']);
+var LOCATE_TRUCKS_ENDPOINT = "/foodtruckmapper/locatetrucks";
 
-$(document).ready(function() {
-    console.log("Document is Ready now let's make a call out to Food Truck API.");
-    fetchFoodTruckData();
-});
+var myApp = angular.module('foodTruckApp', ['ngMap']);
 
 function fetchFoodTruckData() {
     $.ajax({

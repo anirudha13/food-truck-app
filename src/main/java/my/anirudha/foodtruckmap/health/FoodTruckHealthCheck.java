@@ -3,10 +3,7 @@ package my.anirudha.foodtruckmap.health;
 import com.codahale.metrics.health.HealthCheck;
 
 /**
- * Created with IntelliJ IDEA.
- * User: anirudha
- * Date: 03/11/14
- * Time: 4:27 PM
+ * A Simple health check for the food truck mapper.
  *
  * @author anirudha
  */

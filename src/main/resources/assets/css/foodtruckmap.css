@@ -2,3 +2,8 @@ body {
     padding-top: 50px;
     min-height: 2000px;
 }
+
+#mapElem {
+    height: 400px;
+    display: block;
+}
