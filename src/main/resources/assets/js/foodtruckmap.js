@@ -27,4 +27,8 @@ foodTruckApp.controller('FoodTruckMapController', ['$scope', '$http', function($
             // create the error label on top of the page with the error message
         });
 
+    $scope.doSomeThingWithTruck = function(truck) {
+        console.log("Got function call with evaled value :: " + truck);
+    }
+
 }]);
