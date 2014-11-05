@@ -9,6 +9,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import my.anirudha.foodtruckmap.core.FoodTruckService;
 import my.anirudha.foodtruckmap.health.FoodTruckHealthCheck;
+import my.anirudha.foodtruckmap.resources.FilterValuesResource;
 import my.anirudha.foodtruckmap.resources.FoodTruckResource;
 
 public class FoodTruckApplication extends Application<FoodTruckConfiguration> {
@@ -32,6 +33,7 @@ public class FoodTruckApplication extends Application<FoodTruckConfiguration> {
         bootstrap.addBundle(new AssetsBundle("/assets/marker", "/marker", null, "marker"));
         bootstrap.addBundle(new AssetsBundle("/assets/angularjs", "/angularjs", null, "angularjs"));
         bootstrap.addBundle(new AssetsBundle("/assets/ngmap", "/ngmap", null, "ngmap"));
+        bootstrap.addBundle(new AssetsBundle("/assets/angular-bootstrap", "/angular-bootstrap", null, "angular-bootstrap"));
     }
 
     @Override
@@ -45,7 +47,9 @@ public class FoodTruckApplication extends Application<FoodTruckConfiguration> {
         foodTruckService.init();
 
         final FoodTruckResource foodTruckResource = new FoodTruckResource(foodTruckService);
+        final FilterValuesResource filterValuesResource = new FilterValuesResource(foodTruckService);
         environment.jersey().register(foodTruckResource);
+        environment.jersey().register(filterValuesResource);
     }
 
 }

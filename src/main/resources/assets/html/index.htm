@@ -22,6 +22,8 @@
     <script src="bootstrap/dist/js/bootstrap.js"></script>
     <script src="angularjs/angular.js"></script>
     <script src="ngmap/build/scripts/ng-map.js"></script>
+    <script src="angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="js/foodtruckmap.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
@@ -31,20 +33,39 @@
 <div class="container" data-ng-controller="FoodTruckMapController">
 
     <div class="page-header">
-        <h1>SF Food Truck Mapper</h1>
-        <p class="lead">A Simple Web App that Maps the locations of all the Food Trucks in San Francisco, CA.</p>
+        <h1>SF Food Truck Map</h1>
+        <p class="lead">A Simple Web App that Maps the Food Trucks of San Francisco, CA.</p>
     </div>
 
     <div class="row">
 
         <div id="filterContainer" class="col-md-3">
-            <p>This is the Column for the filtering of the Map Markers</p>
-            <p>This is the Column for the filtering of the Map Markers</p>
+
+            <div class="row control-container">
+                <label class="control-label">Facility Type</label>
+
+                <!--<select name="dattr-{{$index}}" ng-model="dattr.selected" class="selectpicker span2-5"-->
+                        <!--ng-options="v for v in dattr.values">-->
+                    <!--<option value=""></option>-->
+                <!--</select>-->
+
+                    <select class="form-control" name="facilityTypeFilter" ng-model="facilityTypeFilter" data-ng-options="v for v in facilityTypeValues">
+                        <option value=""></option>
+                    </select>
+            </div>
+
+            <div class="row control-container">
+                <label class="control-label">Food Item</label>
+                <input type="text" class="form-control" placeholder="enter food items for typeahead"
+                       ng-model="foodItemText" typeahead="fi for fi in foodItemValues | filter:$viewValue"
+                       typeahead-editable="true" typeahead-min-length="1">
+            </div>
+
         </div>
 
         <div id="mapContainer" class="col-md-9">
             <map id="mapElem" center="[37.7577,-122.4376]" zoom="12">
-                <marker ng-repeat="truck in trucks"
+                <marker ng-repeat="truck in trucks | foodItemFilter:foodItemText | facilityTypeFilter:facilityTypeFilter"
                         position="{{truck.latitude}}, {{truck.longitude}}"
                         draggable="false"
                         clickable="false"

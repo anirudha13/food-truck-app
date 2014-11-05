@@ -4,7 +4,7 @@
  */
 
 #mapElem {
-    height: 400px;
+    height: 500px;
     display: block;
 }
 
@@ -13,4 +13,9 @@
     white-space: -moz-pre-wrap; /* Firefox */
     white-space: -o-pre-wrap;   /* Opera 7 */
     word-wrap: break-word;      /* IE */
+}
+
+.control-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

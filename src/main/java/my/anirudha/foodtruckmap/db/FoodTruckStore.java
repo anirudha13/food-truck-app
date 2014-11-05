@@ -3,10 +3,13 @@ package my.anirudha.foodtruckmap.db;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
@@ -22,6 +25,7 @@ public class FoodTruckStore {
 
     private Map<String, FoodTruck> foodTrucksByName = new LinkedHashMap<>();
     private Multimap<String, FoodTruck> foodTrucksByFoodItem = TreeMultimap.create();
+    private Set<String> foodTruckFacilityTypes = new LinkedHashSet<>();
     private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
     private Date lastUpdated;
@@ -33,6 +37,7 @@ public class FoodTruckStore {
         readWriteLock.writeLock().lock();
         foodTrucksByFoodItem.clear();
         foodTrucksByName.clear();
+        foodTruckFacilityTypes.clear();
         lastUpdated = null;
         readWriteLock.writeLock().unlock();
     }
@@ -73,6 +78,10 @@ public class FoodTruckStore {
             readWriteLock.readLock().unlock();
         }
     }
+
+    public Set<String> getFoodTruckFacilityTypes() {
+        return this.foodTruckFacilityTypes;
+    }
     
     public Collection<FoodTruck> fetchAll() {
         try {
@@ -109,6 +118,11 @@ public class FoodTruckStore {
 
         // insert the food truck into the name map
         this.foodTrucksByName.put(foodTruck.getApplicant(), foodTruck);
+
+        // insert the food truck facility type into the facility type set
+        if (StringUtils.isNotEmpty(foodTruck.getFacilitytype())) {
+            this.foodTruckFacilityTypes.add(foodTruck.getFacilitytype());
+        }
 
         // insert the food truck into the food item map
         Set<String> foodItems = foodTruck.getFoodItems();

@@ -1,7 +1,6 @@
 package my.anirudha.foodtruckmap.core;
 
 import java.io.StringWriter;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -67,7 +66,11 @@ public class FoodTruckService {
             if (objectNode.has("fooditems")) {
                 String foodItemStr = objectNode.get("fooditems").asText();
                 String[] foodItems = StringUtils.splitByWholeSeparatorPreserveAllTokens(foodItemStr, ":");
-                Set<String> foodItemVal = new LinkedHashSet<>(Arrays.asList(foodItems));
+                Set<String> foodItemVal = new LinkedHashSet<>();
+                for (String fi : foodItems) {
+                    fi = fi.trim();
+                    foodItemVal.add(fi);
+                }
                 foodTruck.setFoodItems(foodItemVal);
             }
 
@@ -80,5 +83,13 @@ public class FoodTruckService {
 
     public Collection<FoodTruck> fetchAll() {
         return this.foodTruckStore.fetchAll();
+    }
+
+    public Collection<String> getFacilityTypes() {
+        return this.foodTruckStore.getFoodTruckFacilityTypes();
+    }
+
+    public Collection<String> getFoodItems() {
+        return this.foodTruckStore.getAllFoodItems();
     }
 }
