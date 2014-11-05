@@ -16,5 +16,5 @@ The application uses the following technologies,
 The application is Demo'ed [here](https://fierce-escarpment-9671.herokuapp.com/foodtruckmap/app).
 
 TODOs
-- [] Display information of the Food Trucks marked on the Map in a List view as well
-- [] Add functionality for the backend to update the Food Truck Store periodically. Right now the server only initializes itself with all the Food Truck data upon startup due to the latency.
+- [ ] Display information of the Food Trucks marked on the Map in a List view as well
+- [ ] Add functionality for the backend to update the Food Truck Store periodically. Right now the server only initializes itself with all the Food Truck data upon startup due to the latency.
