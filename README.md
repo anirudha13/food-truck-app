@@ -14,13 +14,13 @@ The application uses the following technologies,
 
 The application is Demo'ed [here](https://fierce-escarpment-9671.herokuapp.com/foodtruckmap/app).
 
-Assumptions
+### Assumptions
 * The map does not center itself based on user location but is hardcoded to center on SF.
 ** Reason being that food truck data is not available globally so there was no point to center this on any other location.
 * The Food truck data is not updated frequently since the likelihood of this changing often is very low.
 ** Although I have a TODO below to periodically add the ability to the backend to refresh the data by making a call to the API endpoint.
 * Food trucks with EXPIRED application status are not stored in the server since these do not have location information with them.
 
-TODOs
+### TODOs
 - [ ] Display information of the Food Trucks marked on the Map in a List view as well
 - [ ] Add functionality for the backend to update the Food Truck Store periodically. Right now the server only initializes itself with all the Food Truck data upon startup due to the latency.
